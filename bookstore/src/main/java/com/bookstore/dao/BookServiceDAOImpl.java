@@ -16,7 +16,7 @@ public class BookServiceDAOImpl implements BookServiceDAO {
 
 	@Autowired
 	private EntityManager entityManager;
-	
+
 	@Override
 	public boolean addBook(Book book) {
 		Session current = entityManager.unwrap(Session.class);
@@ -29,14 +29,25 @@ public class BookServiceDAOImpl implements BookServiceDAO {
 	public List<Book> searchBook(Integer isbn, String title, String author) {
 		Session current = entityManager.unwrap(Session.class);
 		Query result = null;
-		if(isbn != null)
-			result = current.createQuery("FROM book WHERE isbn = " + isbn);
-		else if(title != null && author != null)
-			result = current.createQuery("FROM book WHERE title LIKE '%" + title + "%' AND author LIKE '%" + author + "%' LIMIT 100");
-		else if(title != null)
-			result = current.createQuery("FROM book WHERE title LIKE '%" + title + "%' LIMIT 100");
-		else if(author != null)
-			result = current.createQuery("FROM book WHERE author LIKE '%" + author + "%' LIMIT 100");
+
+		StringBuilder query = new StringBuilder("FROM Book WHERE ");
+
+		if (isbn != null) {
+			query.append("isbn = " + isbn);
+		}
+		if (title != null) {
+			if(isbn != null)
+				query.append(" AND ");
+			query.append(" title LIKE '%" + title + "%'");
+		}
+		if (author != null) {
+			if(title != null)
+				query.append(" AND ");
+			query.append(" author LIKE '%" + author + "%'");
+		}
+
+		result = current.createQuery(query.toString()).setMaxResults(100);
+
 		List<Book> bookList = result.list();
 		System.out.println(bookList);
 		return bookList;

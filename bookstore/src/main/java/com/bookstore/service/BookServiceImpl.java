@@ -28,7 +28,7 @@ public class BookServiceImpl implements BookService {
 			System.out.println("Please provide atleast one detail");
 			return null;
 		} else 
-			return bookServiceDAO.searchBook(isbn.intValue(), title, author);
+			return bookServiceDAO.searchBook(isbn, title, author);
 	}
 
 	@Transactional
