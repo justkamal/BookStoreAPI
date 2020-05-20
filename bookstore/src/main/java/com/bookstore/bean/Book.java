@@ -1,10 +1,24 @@
 package com.bookstore.bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="book")
 public class Book {
-	
+	@Id
+	@Column
 	private int isbn;
+	
+	@Column
 	private String title;
+	
+	@Column
 	private String author;
+	
+	@Column
 	private float price;
 	
 	public Book() {

@@ -2,6 +2,10 @@ package com.bookstore.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
+import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bookstore.bean.Book;
@@ -9,10 +13,14 @@ import com.bookstore.bean.Book;
 @Repository
 public class BookServiceDAOImpl implements BookServiceDAO {
 
+	@Autowired
+	private EntityManager entityManager;
+	
 	@Override
 	public boolean addBook(Book book) {
-		System.out.println("Added !");
-		return false;
+		Session current = entityManager.unwrap(Session.class);
+		current.save(book);
+		return true;
 	}
 
 	@Override

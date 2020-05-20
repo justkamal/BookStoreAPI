@@ -9,6 +9,8 @@ import com.bookstore.bean.Book;
 @Repository
 public interface BookServiceDAO {
 	
+	public static final String INSERT = "INSERT INTO book VALUES";
+	
 	public boolean addBook(Book book);
 	
 	public List<Book> searchBook(int isbn, String title, String author);
