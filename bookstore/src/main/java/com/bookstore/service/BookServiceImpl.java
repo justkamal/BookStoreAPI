@@ -33,7 +33,7 @@ public class BookServiceImpl implements BookService {
 
 	@Transactional
 	@Override
-	public List<Book> buyBook(Integer isbn) {
+	public Book buyBook(Integer isbn) {
 		return bookServiceDAO.buyBook(isbn);
 	}
 

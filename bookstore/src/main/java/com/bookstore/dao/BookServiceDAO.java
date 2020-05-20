@@ -15,7 +15,7 @@ public interface BookServiceDAO {
 	
 	public List<Book> searchBook(Integer isbn, String title, String author);
 	
-	public List<Book> buyBook(Integer isbn);
+	public Book buyBook(Integer isbn);
 	
 	public List<String> searchMediaCover(String title);
 }
