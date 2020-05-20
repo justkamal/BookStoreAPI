@@ -33,7 +33,7 @@ public class BookStoreController {
 	}
 	
 	@PutMapping("/buyBook")
-	public List<Book> buyBook(@RequestParam("ISBN") int isbn){
+	public List<Book> buyBook(@RequestParam("ISBN") Integer isbn){
 		return bookService.buyBook(isbn);
 	}
 	

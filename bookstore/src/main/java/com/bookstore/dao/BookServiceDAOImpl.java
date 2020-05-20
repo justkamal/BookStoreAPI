@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,14 +25,24 @@ public class BookServiceDAOImpl implements BookServiceDAO {
 	}
 
 	@Override
-	public List<Book> searchBook(int isbn, String title, String author) {
-		System.out.println("Searching...");
-		return null;
+	public List<Book> searchBook(Integer isbn, String title, String author) {
+		Session current = entityManager.unwrap(Session.class);
+		Query result = null;
+		if(isbn != null)
+			result = current.createQuery("FROM book WHERE isbn = " + isbn);
+		else if(title != null && author != null)
+			result = current.createQuery("FROM book WHERE title LIKE %" + title + "% AND author LIKE %" + author + "% LIMIT 100");
+		else if(title != null)
+			result = current.createQuery("FROM book WHERE title LIKE %" + title + "% LIMIT 100");
+		else if(author != null)
+			result = current.createQuery("FROM book WHERE author LIKE %" + author + "% LIMIT 100");
+		List<Book> bookList = result.list();
+		return bookList;
 	}
 
 	@Override
-	public List<Book> buyBook(int isbn) {
-		System.out.println("Adding to book list..");
+	public List<Book> buyBook(Integer isbn) {
+		
 		return null;
 	}
 

@@ -13,7 +13,7 @@ public interface BookService {
 	
 	public List<Book> searchBook(Integer isbn, String title, String author);
 	
-	public List<Book> buyBook(int isbn);
+	public List<Book> buyBook(Integer isbn);
 	
 	public List<String> searchMediaCover(String title);
 }
