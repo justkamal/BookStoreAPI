@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,10 +20,9 @@ public class BookStoreController {
 	@Autowired
 	private BookService bookService;
 
-	@PutMapping("/addBook")
+	@PostMapping("/addBook")
 	public void addBook(Book book) {
 		bookService.addBook(book);
-		System.out.println(book);
 	}
 	
 	@GetMapping("/searchBook")
