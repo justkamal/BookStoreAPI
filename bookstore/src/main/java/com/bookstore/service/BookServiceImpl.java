@@ -24,25 +24,23 @@ public class BookServiceImpl implements BookService {
 	@Transactional
 	@Override
 	public List<Book> searchBook(Integer isbn, String title, String author) {
-		if(isbn == null && title == null && author == null)
+		if(isbn == null && title == null && author == null) {
 			System.out.println("Please provide atleast one detail");
-		else 
+			return null;
+		} else 
 			return bookServiceDAO.searchBook(isbn.intValue(), title, author);
-		return null;
 	}
 
 	@Transactional
 	@Override
-	public List<Book> buyBook(int isbn) {
-		bookServiceDAO.buyBook(isbn);
-		return null;
+	public List<Book> buyBook(Integer isbn) {
+		return bookServiceDAO.buyBook(isbn);
 	}
 
 	@Transactional
 	@Override
 	public List<String> searchMediaCover(String title) {
-		bookServiceDAO.searchMediaCover(title);
-		return null;
+		return bookServiceDAO.searchMediaCover(title);
 	}
 
 }
