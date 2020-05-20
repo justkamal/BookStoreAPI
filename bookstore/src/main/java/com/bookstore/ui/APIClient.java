@@ -25,10 +25,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 							"configuration"})
 public class APIClient {
 	
-	private void syso() {
-
-	}
-	
 	public static void main(String[] args) throws SQLException {
 		SpringApplication.run(APIClient.class, args);
 	}
