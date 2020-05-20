@@ -43,9 +43,13 @@ public class BookServiceDAOImpl implements BookServiceDAO {
 	}
 
 	@Override
-	public List<Book> buyBook(Integer isbn) {
-		
-		return null;
+	public Book buyBook(Integer isbn) {
+		Session current = entityManager.unwrap(Session.class);
+		Book book = current.get(Book.class, isbn);
+		if(book.getAvailable_copies() > 1)
+			book.setAvailable_copies(book.getAvailable_copies() - 1);
+		current.update(book);
+		return book;
 	}
 
 	@Override
