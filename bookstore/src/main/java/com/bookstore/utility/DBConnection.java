@@ -1,4 +1,4 @@
-package database;
+package com.bookstore.utility;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
