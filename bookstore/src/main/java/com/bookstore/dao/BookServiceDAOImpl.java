@@ -24,6 +24,7 @@ public class BookServiceDAOImpl implements BookServiceDAO {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Book> searchBook(Integer isbn, String title, String author) {
 		Session current = entityManager.unwrap(Session.class);
@@ -31,12 +32,13 @@ public class BookServiceDAOImpl implements BookServiceDAO {
 		if(isbn != null)
 			result = current.createQuery("FROM book WHERE isbn = " + isbn);
 		else if(title != null && author != null)
-			result = current.createQuery("FROM book WHERE title LIKE %" + title + "% AND author LIKE %" + author + "% LIMIT 100");
+			result = current.createQuery("FROM book WHERE title LIKE '%" + title + "%' AND author LIKE '%" + author + "%' LIMIT 100");
 		else if(title != null)
-			result = current.createQuery("FROM book WHERE title LIKE %" + title + "% LIMIT 100");
+			result = current.createQuery("FROM book WHERE title LIKE '%" + title + "%' LIMIT 100");
 		else if(author != null)
-			result = current.createQuery("FROM book WHERE author LIKE %" + author + "% LIMIT 100");
+			result = current.createQuery("FROM book WHERE author LIKE '%" + author + "%' LIMIT 100");
 		List<Book> bookList = result.list();
+		System.out.println(bookList);
 		return bookList;
 	}
 
