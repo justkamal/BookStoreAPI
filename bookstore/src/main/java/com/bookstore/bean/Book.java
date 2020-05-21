@@ -36,7 +36,7 @@ public class Book {
 		this.price = book.price;
 		this.available_copies = book.available_copies;
 	}
-
+	
 	public int getIsbn() {
 		return isbn;
 	}
