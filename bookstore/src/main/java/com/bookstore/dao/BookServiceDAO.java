@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.bookstore.bean.Book;
+import com.bookstore.bean.Post;
 
 @Repository
 public interface BookServiceDAO {
@@ -17,5 +18,5 @@ public interface BookServiceDAO {
 	
 	public Book buyBook(Integer isbn);
 	
-	public List<String> searchMediaCover(String title);
+	public List<Post> getMediaCoverPosts();
 }
