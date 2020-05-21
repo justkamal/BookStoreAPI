@@ -1,5 +1,6 @@
 package com.bookstore.dao;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,8 +9,10 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.client.RestTemplate;
 
 import com.bookstore.bean.Book;
+import com.bookstore.bean.Post;
 
 @Repository
 public class BookServiceDAOImpl implements BookServiceDAO {
@@ -64,8 +67,10 @@ public class BookServiceDAOImpl implements BookServiceDAO {
 	}
 
 	@Override
-	public List<String> searchMediaCover(String title) {
-		System.out.println("Searching for Media Cover");
-		return null;
+	public List<Post> getMediaCoverPosts() {
+		RestTemplate externalAPI = new RestTemplate();
+		Post[] posts = externalAPI.getForObject("https://jsonplaceholder.typicode.com/posts", Post[].class);
+		
+		return Arrays.asList(posts);
 	}
 }
