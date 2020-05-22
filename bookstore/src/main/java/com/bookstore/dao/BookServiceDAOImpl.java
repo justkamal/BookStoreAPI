@@ -13,7 +13,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.bookstore.bean.Book;
 import com.bookstore.bean.Post;
-import com.bookstore.exception.FieldValueTooSmallException;
 
 @Repository
 public class BookServiceDAOImpl implements BookServiceDAO {
@@ -40,15 +39,11 @@ public class BookServiceDAOImpl implements BookServiceDAO {
 			query.append("isbn = " + isbn);
 		}
 		if (title != null) {
-			if(title.length() < 3)
-				throw new FieldValueTooSmallException("Please provide at least 3 letters for partial matching");
 			if(isbn != null)
 				query.append(" AND ");
 			query.append(" title LIKE '%" + title + "%'");
 		}
 		if (author != null) {
-			if(author.length() < 3)
-				throw new FieldValueTooSmallException("Please provide at least 3 letters for partial matching");
 			if(title != null)
 				query.append(" AND ");
 			query.append(" author LIKE '%" + author + "%'");

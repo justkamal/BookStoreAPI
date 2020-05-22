@@ -18,6 +18,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.bookstore.bean.Book;
 import com.bookstore.bean.Post;
 import com.bookstore.dao.BookServiceDAO;
+import com.bookstore.exception.FieldValueTooSmallException;
+import com.bookstore.exception.InvalidInputException;
 import com.bookstore.service.BookService;
 import com.bookstore.ui.APIClient;
 
@@ -87,6 +89,32 @@ public class APIUnitTest {
 		when(bookServiceDAO.searchBook(null, null, author)).thenReturn(bookList);
 		assertEquals(bookList, bookService.searchBook(null, null, author));
 		
+		
+	}
+	
+	@Test(expected=FieldValueTooSmallException.class)
+	public void searchBookFieldValueTooSmallTest() {
+		int isbn = 123;
+		String title = "t";
+		String author = "a";
+		
+		Book book = new Book();
+		book.setIsbn(isbn);
+		book.setTitle(title);
+		book.setAuthor(author);
+		book.setPrice(90.7f);
+		book.setAvailable_copies(1);
+		
+		List<Book> bookList = Arrays.asList(
+			new Book(book)
+		);
+		
+		when(bookServiceDAO.searchBook(null, title, author)).thenReturn(bookList);
+		assertNull(bookService.searchBook(null, title, author));		//field value too small, so exception will be expected
+	}
+	
+	@Test(expected=InvalidInputException.class)
+	public void searchBookInvalidInputTest() {
 		when(bookServiceDAO.searchBook(null, null, null)).thenReturn(null);
 		assertNull(bookService.searchBook(null, null, null));			// since at least one parameter should not be null
 	}

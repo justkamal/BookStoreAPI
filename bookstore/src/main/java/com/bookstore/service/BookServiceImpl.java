@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bookstore.bean.Book;
 import com.bookstore.bean.Post;
 import com.bookstore.dao.BookServiceDAO;
+import com.bookstore.exception.FieldValueTooSmallException;
 import com.bookstore.exception.InvalidInputException;
 import com.bookstore.exception.PostNotFoundException;
 import com.bookstore.utility.Trie;
@@ -59,6 +60,8 @@ public class BookServiceImpl implements BookService {
 	public List<Book> searchBook(Integer isbn, String title, String author) {
 		if (isbn == null && title == null && author == null)
 			throw new InvalidInputException("Please provide at least one detail");
+		else if(title != null && title.length() < 3 || author != null && author.length() < 3)
+			throw new FieldValueTooSmallException("Please provide at least 3 letters for partial matching");
 		else
 			return bookServiceDAO.searchBook(isbn, title, author);
 	}
