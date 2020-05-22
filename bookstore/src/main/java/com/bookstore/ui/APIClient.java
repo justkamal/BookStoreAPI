@@ -19,11 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @EntityScan(basePackages = {"com.bookstore.bean"})
 @ComponentScan( basePackages = { 
-							"com.bookstore.controller",
-							"com.bookstore.bean",
-							"com.bookstore.service",
-							"com.bookstore.dao",
-							"com.bookstore.ui",
+							"com.bookstore.*",
 							"configuration"})
 public class APIClient {
 	
