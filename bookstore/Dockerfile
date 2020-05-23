@@ -7,9 +7,9 @@ COPY --from=0 /app/BookStoreAPI /app (2)
 RUN mvn install (3)
 
 FROM openjdk:8-jre-alpine
-EXPOSE 8080
 WORKDIR /app
 COPY --from=1 /app/target/bookstore-app-docker.jar /app (4)
+EXPOSE 8080
 CMD ["java -jar bookstore-app-docker"] (5)
 
 FROM mysql:8.0.20 as builder
