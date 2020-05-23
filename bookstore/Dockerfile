@@ -1,5 +1,4 @@
 FROM openjdk:8
-FROM mysql:8.0.20
 EXPOSE 8080
 ADD target/bookstore-app-docker.jar bookstore-app-docker.jar
 ENTRYPOINT ["java", "-jar", "bookstore-app-docker.jar"]
